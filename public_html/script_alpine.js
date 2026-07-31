@@ -5,7 +5,7 @@ document.addEventListener('alpine:init', () => {
         entered_letters: {},
         suggestions: ['Results'],
         words: [],
-        dev:true,
+        dev:false,
         init() {
 
             for (r=1;r<=6;r++) {
