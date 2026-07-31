@@ -1,0 +1,12 @@
+services:
+  webserver:
+    container_name: wordle        
+    image: lipanski/docker-static-website:latest
+    restart: always
+    ports:
+      - "3000:3000"
+    expose:
+      - 3000
+    volumes:
+      - ../public_html:/home/static
+      
