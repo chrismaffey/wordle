@@ -1,0 +1,102 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5"/>
+    <title>Chris' Wordle solver</title>
+    <link rel="stylesheet" href="bootstrap.min.css"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="script_alpine.js"></script>
+</head>
+
+<body @keyup="keyup($event)" x-data="wordle">
+
+
+<div class="container h-100">
+    <div class="row  h-100">
+        <div class="col-12">
+            <div class="h-100 d-flex flex-column">
+                <div class="row" >
+                    <div class="col-12 pb-5">
+                        <h1 @dblclick="dev = !dev">Help with Wordle</h1>
+                        <p class="text-muted" x-show="!dev">Not cheating if you write your own helper!</p>
+                        <p>Type your letters to match your wordle grid, then click each box to make the letter change to the same colour as in your wordle</p>
+                        <a href="https://www.nytimes.com/games/wordle/index.html" target="_blank">Wordle on NY Times</a>
+
+                    </div>
+                </div>
+
+                <div class="row flex-grow-1">
+                    <div class="col-9 col-md-6">
+                        <template x-for="(r,r_index) in entered_letters">
+                            <div class="row row-cols-lg-auto align-items-center">
+                                <template x-for="(c,c_index) in r">
+                                    <div @click="click(r_index,c_index)"
+                                         :class="colour(r_index,c_index)" class="letter-box"
+                                         x-html="entered_letters[r_index][c_index]">
+                                      </div>
+                                </template>
+                            </div>
+                        </template>
+                            <div x-show="dev">
+                                <button @click="save()">Save</button>
+                                <button @click="load()">Load</button>
+                            </div>
+
+                    </div>
+                    <div class="col-3 col-md-6 results-container pl-md-4">
+                        <template x-for="word in suggestions">
+                            <div class="word-suggestion" x-text="word"></div>
+                        </template>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+<style>
+    html, body {
+        height: 100%;
+    }
+
+    .letter-box {
+        width:60px;
+        height:60px;
+        font-size:2.2em;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+        border: 2px solid #eee;
+        border-radius: 5px;
+        margin: 5px;
+    }
+
+    @media screen and (max-width: 500px) {
+        .letter-box {
+            width:40px;
+            height:40px;
+            font-size:1.5em;
+        }
+
+    }
+
+    .results-container {
+        position:relative;
+        max-height: 100dvh; /* use 100vh if you prefer */
+        overflow-y: auto;
+    }
+
+
+    .container .d-flex.flex-column > .results-container {
+        min-height: 0; /* allow flex child to shrink */
+    }
+
+</style>
+
+</html>
+
+
