@@ -1,8 +1,22 @@
 services:
   webserver:
+    container_name: wordle        
     image: lipanski/docker-static-website:latest
     restart: always
     ports:
       - "80:3000"
     volumes:
       - ./public_html:/home/static
+      
+    networks:
+      - web
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.wordle-secure.rule=Host(`wordle.chrismaffey.com`)
+      - traefik.http.routers.wordle-secure.entrypoints=websecure
+      - traefik.http.routers.wordle-secure.middlewares=common@docker
+
+
+networks:
+  web:
+    external: true
