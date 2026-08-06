@@ -5,7 +5,7 @@ document.addEventListener('alpine:init', () => {
         entered_letters: {},
         suggestions: ['Results'],
         words: [],
-        dev:false,
+        dev:true,
         init() {
 
             for (r=1;r<=6;r++) {
@@ -17,9 +17,11 @@ document.addEventListener('alpine:init', () => {
             fetch("wordlist.txt").then(response => response.text()).then(data => {
                 let word_temp = data.replace("\r","");
                 let words = word_temp.split("\n");
+           //     let words = ['shine','eying','neigh'];
                 this.words = words.map((word) => {
                     return word.split("");
                 });
+                
             })
         },
         click(r, c) {
@@ -154,12 +156,11 @@ document.addEventListener('alpine:init', () => {
                         continue wordLoop;
                     }
                     if(this.good_letters[letter]) {
-                        if (this.good_letters[letter].includes(i+1)) {
+                        if (this.good_letters[letter].includes((i+1).toString())) {
                             console.log('exact place issue');
                             //letter in exact place
                             continue wordLoop;
                         } else {
-                            console.log('remove matching');
                             //remove letter from needing matching array
                             const i = good_letters_needing_matching.indexOf(letter);
                             if (i !== -1) good_letters_needing_matching.splice(i, 1);
