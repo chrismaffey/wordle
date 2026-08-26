@@ -5,4 +5,4 @@ services:
     expose:
       - 80
     volumes:
-      - ./public:/var/www/html:ro
+      - ./public_html:/var/www/html:ro
