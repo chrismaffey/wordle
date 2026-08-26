@@ -1,8 +1,8 @@
 services:
   wordle:
-    image: lipanski/docker-static-website:latest
+    image: php:8.3-apache
     restart: unless-stopped
     expose:
-      - 3000
+      - 80
     volumes:
-      - ./public_html:/home/static
+      - ./public:/var/www/html:ro
