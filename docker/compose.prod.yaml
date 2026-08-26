@@ -1,6 +1,5 @@
 services:
   wordle:
-    container_name: wordle        
     image: lipanski/docker-static-website:latest
     restart: unless-stopped
     expose:
