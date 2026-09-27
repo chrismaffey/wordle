@@ -1,8 +1,0 @@
-services:
-  wordle:
-    image: lipanski/docker-static-website:latest
-    restart: unless-stopped
-    expose:
-      - 80
-    volumes:
-      - ../public_html:/home/static

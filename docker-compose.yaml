@@ -1,2 +1,14 @@
-include:
-  - docker/compose.${APP_ENV}.yaml
+services:
+  webserver:
+    container_name: wordle
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: dev
+    restart: always
+    ports:
+      - "3000:3000"
+    expose:
+      - 3000
+    volumes:
+      - ./public_html:/home/static
